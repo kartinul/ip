@@ -11,7 +11,7 @@ CLEAR_SCREEN = False
 AUTH = {
     "host": "localhost",
     "user": "root",
-    "password": "10915",
+    "password": "root",
     "database": "petrol_db",
 }
 ENGINE_URI = f"mysql+pymysql://{AUTH['user']}:{AUTH['password']}@{AUTH['host']}"
