@@ -1,1 +1,5 @@
 sqlalchemy
+pandas
+matplotlib
+pymysql
+cryptography

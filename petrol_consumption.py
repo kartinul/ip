@@ -11,7 +11,7 @@ CLEAR_SCREEN = False
 AUTH = {
     "host": "localhost",
     "user": "root",
-    "password": "10915",
+    "password": "root",
     "database": "petrol_db",
 }
 ENGINE_URI = f"mysql+pymysql://{AUTH['user']}:{AUTH['password']}@{AUTH['host']}"
@@ -173,6 +173,7 @@ def setup_database():
 
     print("Database and table set up successfully.")
 
+setup_database()
 
 def export_to_sql():
     global dataframe
@@ -185,7 +186,7 @@ def export_to_sql():
     print("Data exported to MySQL database.")
 
 
-def generate_graph():
+def generate_graph(saveToImg = False):
     global dataframe
 
     if dataframe.empty:
@@ -204,7 +205,6 @@ def generate_graph():
         plt.title("Petrol Consumption")
         plt.xlabel("Index")
         plt.ylabel("Consumption")
-        plt.show()
 
     elif choice == "2":
         plt.scatter(
@@ -217,9 +217,15 @@ def generate_graph():
         plt.xlabel("Index")
         plt.ylabel("Consumption")
         plt.legend()
-        plt.show()
     else:
         print("Invalid choice.")
+       
+    if (saveToImg):
+           plt.savefig('consumption_graph.png')
+           print("Saved to consumption_graph.png")
+    else:
+        plt.show()
+    
 
 
 def toggle_clear_screen():
@@ -239,9 +245,10 @@ def display_menu():
     print("6. View Average Consumption")
     print("7. Export to SQL")
     print("8. Generate Graph")
-    print("9. Clear All Data")
-    print("10. Toggle Clear Screen")
-    print("11. Exit")
+    print("9. Save Graph as png")
+    print("10. Clear All Data")
+    print("11. Toggle Clear Screen")
+    print("12. Exit")
 
 
 def main():
@@ -268,11 +275,13 @@ def main():
             export_to_sql()
         elif choice == "8":
             generate_graph()
-        elif choice == "9":
-            clear_all_data()
+        elif choice == '9':
+            generate_graph(True)
         elif choice == "10":
-            toggle_clear_screen()
+            clear_all_data()
         elif choice == "11":
+            toggle_clear_screen()
+        elif choice == "12":
             print("Exiting the program. Goodbye!")
             break
         else:
